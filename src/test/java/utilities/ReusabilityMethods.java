@@ -1,9 +1,11 @@
 package utilities;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ReusabilityMethods {
 
@@ -15,12 +17,32 @@ public class ReusabilityMethods {
         }
     }
 
-    public static List<String> stringListeyeDonustur(List<WebElement> webElementList ){
+    public static List<String> stringListeyeDonustur(List<WebElement> webElementList) {
         List<String> tumListeStr = new ArrayList<>();
-        for ( WebElement eachBaslik : webElementList ){
+        for (WebElement eachBaslik : webElementList) {
             tumListeStr.add(eachBaslik.getText());
         }
         return tumListeStr;
+    }
+
+    public static void urlIleWindowDegistirme(WebDriver driver, String hedefUrl) {
+        Set<String> tumWindowsWhd = driver.getWindowHandles();
+        for (String eachWhd : tumWindowsWhd) {
+            driver.switchTo().window(eachWhd);
+            if (driver.getCurrentUrl().equals(hedefUrl)) {
+                break;
+            }
+        }
+    }
+
+    public static void titleIleWindowDegistirme(WebDriver driver, String hedefTitle) {
+        Set<String> tumWindowsWhd = driver.getWindowHandles();
+        for (String eachWhd : tumWindowsWhd) {
+            driver.switchTo().window(eachWhd);
+            if (driver.getTitle().equals(hedefTitle)) {
+                break;
+            }
+        }
     }
 
 }
