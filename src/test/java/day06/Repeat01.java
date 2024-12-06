@@ -47,13 +47,16 @@ public class Repeat01 extends TestBaseEach {
                 ikinciWindowWhd = eachWhd;
             }
         }
-        Assertions.assertNotEquals(ilkWindowWhd, ikinciWindowWhd);
+        driver.switchTo().window(ikinciWindowWhd);
+        String expectedUrl = "https://testotomasyonu.com/category/7/products";
+        String actualUrl = driver.getCurrentUrl();
+        Assertions.assertEquals(expectedUrl, actualUrl);
 
         // ● Bulunan urun sayisinin 16 olduğunu test edin
         WebElement urunSayisiElementi = driver.findElement(By.xpath("//*[@*='product-count-text']"));
         String urunSayisiElementiText = urunSayisiElementi.getText(); // 16 Products Found
-        String urunSayisiElementiTextReplace = urunSayisiElementiText.replaceAll("\\D", ""); // 16
-        int actualSayi = Integer.parseInt(urunSayisiElementiTextReplace); // int 16
+        urunSayisiElementiText = urunSayisiElementiText.replaceAll("\\D", ""); // 16
+        int actualSayi = Integer.parseInt(urunSayisiElementiText); // int 16
         int expectedSayi = 16;
         Assertions.assertEquals(expectedSayi, actualSayi);
 
@@ -61,8 +64,8 @@ public class Repeat01 extends TestBaseEach {
         driver.switchTo().window(ilkWindowWhd);
 
         // ● Url’in addremove icerdigini test edin
-        String expectedUrl = "addremove";
-        String actualUrl = driver.getCurrentUrl();
+        expectedUrl = "addremove";
+        actualUrl = driver.getCurrentUrl();
         Assertions.assertTrue(actualUrl.contains(expectedUrl));
     }
 }
