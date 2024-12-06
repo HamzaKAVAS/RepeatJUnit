@@ -1,10 +1,9 @@
-package day06;
+package day06_actionsClass_fileTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import utilities.ReusabilityMethods;
 import utilities.TestBaseEach;
 
 import java.util.Set;
