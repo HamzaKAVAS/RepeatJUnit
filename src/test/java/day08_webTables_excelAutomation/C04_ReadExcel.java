@@ -29,20 +29,21 @@ public class C04_ReadExcel {
 
         // Kullanilan son satirin 20.satir oldugunu test edin
         int expectedSatirSayisi = 20;
-        int actualSatirSayisi = sayfa2obj.getLastRowNum()+1;
-        Assertions.assertEquals(expectedSatirSayisi,actualSatirSayisi); // PASSED
+        int actualSatirSayisi = sayfa2obj.getLastRowNum() + 1;
+        Assertions.assertEquals(expectedSatirSayisi, actualSatirSayisi); // PASSED
 
         // Kullanilan (bos birakilmayan) satir sayisinin 8 oldugunu test edin
         int expectedKullanilanSatir = 8;
         int actualKullanilanSatir = sayfa2obj.getPhysicalNumberOfRows();
-        Assertions.assertEquals(expectedKullanilanSatir,actualKullanilanSatir); // PASSED
+        Assertions.assertEquals(expectedKullanilanSatir, actualKullanilanSatir); // PASSED
 
         // 17.satir 5.hucredeki bilgiyi yazdirin
         System.out.println("17.satır 5.hücre: " + workbook.getSheet("Sayfa2").getRow(16).getCell(4)); // null
 
         // 5.satir 3.hucredeki bilgiyi yazdirin
-        System.out.println("5.satır 3.hücre: " + sayfa2obj.getRow(4).getCell(2)); //
+        // System.out.println("5.satır 3.hücre: " + sayfa2obj.getRow(4).getCell(2)); // NullPointerException verir
 
-        // 5.satir 5.hucredeki bilgiyi yazdirin
+        // 7.satir 5.hucredeki bilgiyi yazdirin
+        System.out.println("7.satır 5.hücre: " + sayfa2obj.getRow(6).getCell(4)); // 8.0
     }
 }
