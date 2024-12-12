@@ -45,7 +45,7 @@ public class C05_ReadExcel {
 
         // Ulke sayisinin 190 oldugunu test edin
         int expectedCountryNumbers = 190;
-        int actualCountryNumbers = sayfa1obj.getPhysicalNumberOfRows()-1;
+        int actualCountryNumbers = sayfa1obj.getLastRowNum() + 1 - 1;
         Assertions.assertEquals(expectedCountryNumbers,actualCountryNumbers);
 
         // Fiziki olarak kullanilan satir sayisinin 191 oldugunu test edin
@@ -54,15 +54,24 @@ public class C05_ReadExcel {
         Assertions.assertEquals(expectedPhysicallyRowNumbers,actualPhysicallyRowNumbers);
 
         // Ingilizce ismi Netherland olan ulkenin baskentinin turkce Amsterdam oldugunu test edin
-        String expectedNetherlandCapitol = "Amsterdam";
-        String actualNetherlandCapitol = sayfa1obj.getRow(122).getCell(3).getStringCellValue();
-        Assertions.assertEquals(expectedNetherlandCapitol,actualNetherlandCapitol);
+        for (int i = 1; i <= sayfa1obj.getLastRowNum() ; i++) {
+            String satirdakiUlkeismi = sayfa1obj.getRow(i).getCell(0).getStringCellValue();
+            if (satirdakiUlkeismi.equals("Netherland")){
+                String turkceBaskentIsmi = sayfa1obj.getRow(i).getCell(3).getStringCellValue();
+                Assertions.assertEquals("Amsterdam",turkceBaskentIsmi);
+                break;
+            }
+        }
 
         // Turkce baskent isimlerinde Ankara bulundugunu test edin
-        for (int i = 0; i <= sayfa1obj.getPhysicalNumberOfRows()-1; i++) {
-            String actualCapitolNames = sayfa1obj.getRow( i ).getCell(3).getStringCellValue();
-            String expectedCapitolName = "Ankara";
-            Assertions.assertTrue(actualCapitolNames.contains(expectedCapitolName));
+        boolean ankaraVarMi = false;
+        for (int i = 1; i <= sayfa1obj.getLastRowNum() ; i++) {
+            String satirdakiTurkceBaskentIsmi = sayfa1obj.getRow(i).getCell(3).getStringCellValue();
+            if (satirdakiTurkceBaskentIsmi.equals("Ankara")){
+                ankaraVarMi = true;
+                break;
+            }
         }
+        Assertions.assertTrue(ankaraVarMi);
     }
 }
